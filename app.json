@@ -4,8 +4,8 @@
     "slug": "budget-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "myapp",
+    "icon": "./assets/images/logo.png",
+    "scheme": "budget-tracker",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
