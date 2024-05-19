@@ -39,7 +39,7 @@ const home = () => {
   }
 
   return (
-    <SafeAreaView className="bg-black-200 h-full">
+    <SafeAreaView className="bg-primary h-full">
       <StatusBar style="light" />
     
       <Header/>

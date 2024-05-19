@@ -1,20 +1,23 @@
 import { StyleSheet, Text, View } from 'react-native'
-import React from 'react'
+import React, { useState } from 'react'
 import PieChart from 'react-native-pie-chart'
+import Colors from '../utils/Colors'
 
 const CircularChart = () => {
-    const widthAndHeight = 150
+    const widthAndHeight = 200
+    const [values, setValues]=useState([1])
+    const [sliceColor,setSliceColor]=useState([Colors.GRAY]);
     const series = [123, 321, 123, 789, 537]
-    const sliceColor = ['#fbd203', '#ffb300', '#ff9100', '#ff6c00', '#ff3c00']
+    
   return (
     <View>
-      <Text>CircularChart</Text>
-      <View>
-      <PieChart
+      <Text className='text-white font-psemibold mb-5'>Your Expenses</Text>
+      <View >
+        <PieChart
             widthAndHeight={widthAndHeight}
-            series={series}
+            series={values}
             sliceColor={sliceColor}
-            coverRadius={0.45}
+            coverRadius={0.6}
             coverFill={'#FFF'}
           />
       </View>
