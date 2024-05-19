@@ -6,6 +6,7 @@ import FormField from '../../components/FormField'
 import { useState } from 'react'
 import CustomButton from '../../components/CustomButton'
 import { Link, useRouter } from 'expo-router'
+import { createUser } from '../../lib/appwrite'
 
 const SignUp = () => {
     const router=useRouter()
@@ -20,7 +21,7 @@ const SignUp = () => {
 
   const submit=()=>{
 
-    router.replace('/home')
+    createUser()
   }
   return (
     <SafeAreaView className='bg-primary h-full'>

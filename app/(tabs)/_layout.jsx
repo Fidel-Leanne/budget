@@ -73,23 +73,6 @@ const TabsLayout = () => {
               />
 
               
-      <Tabs.Screen
-                
-                name="create"
-                options={{
-                  title: 'Create',
-                  headerShown: false,
-                  tabBarIcon:({color, focused})=>(
-                      <TabIcon
-                      icon={icons.home}
-                      color={color}
-                      name="Create"
-                      focused={focused}
-                      />
-                  )
-                }}
-                
-                />
 
     <Tabs.Screen
               
