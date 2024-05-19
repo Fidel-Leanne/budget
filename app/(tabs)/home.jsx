@@ -42,7 +42,7 @@ const home = () => {
     <SafeAreaView className="bg-primary h-full">
       <StatusBar style="light" />
     
-      <Header/>
+      <Header />
       <CircularChart/>
      
       

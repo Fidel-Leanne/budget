@@ -7,23 +7,23 @@ const Header = () => {
   const { user, isLoading } = useGlobalContext();
 
   return (
-    <View className="h-20 bg-slate-700 flex items-center justify-between px-4">
+    <View className="h-[90px] bg-slate-700 flex ">
       <View className="flex-row items-center">
         {user && user.avatar && (
           <Image
             source={{ uri: user.avatar }}
-            className="w-12 h-12 rounded-full mr-4"
-            style={{ marginLeft: 0 }} // Set marginLeft to 0 for the image
+            className="w-12 h-12 rounded-full mr-5 mt-1"
+           // Set marginLeft to 0 for the image
           />
         )}
-        <Text className="text-2xl font-semibold text-white">Welcome to SmartSpend</Text>
+        <Text className=" text-xl font-psemibold text-white">Welcome to SmartSpend</Text>
       </View>
-      <View className="flex-row items-center">
+      <View className="flex-row items-center mt-2">
         {/* Notification Icon */}
-        <Feather name="bell" size={24} color="white" style={{ marginRight: 16 }} />
+        <Feather name="bell" size={24} color="white" className='mr-4 mt'/>
         {/* User Greeting */}
         {user && (
-          <Text className="text-xl font-semibold text-white">Hello, {user.username}!</Text>
+          <Text className="text-xl font-pregular text-white ml-9">Hello, {user.username}!</Text>
         )}
       </View>
     </View>
