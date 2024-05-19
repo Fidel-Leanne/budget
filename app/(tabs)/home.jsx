@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useGlobalContext } from '../../context/GlobalProvider'; // Import the global context
+import { supabase } from '../../utils/SupaBaseConfig';
 
 const Home = () => {
   const { user, isLoading } = useGlobalContext(); // Get the user and loading state from context
+
+  useEffect(() => {
+    if (user) {
+      getCategoryList();
+    }
+  }, [user]); 
 
   if (isLoading) {
     return (
@@ -14,6 +21,14 @@ const Home = () => {
         <Text style={styles.loadingText}>Loading...</Text>
       </SafeAreaView>
     );
+  }
+
+  const getCategoryList=async()=>{
+    const {data,error}= await supabase.from('Category')
+    .select('*')
+    .eq('created_by',user.email)
+
+    console.log(data);
   }
 
   return (
