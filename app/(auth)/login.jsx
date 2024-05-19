@@ -6,7 +6,7 @@ import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { Link, useRouter } from 'expo-router';
 import { signIn } from '../../lib/appwrite';
-
+import Toast from 'react-native-toast-message';
 
 
 const SignIn = () => {

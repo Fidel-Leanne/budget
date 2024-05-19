@@ -2,88 +2,59 @@ import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, ActivityIndicator, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
-import { useGlobalContext } from '../../context/GlobalProvider'; // Import the global context
+import { useGlobalContext } from '../../context/GlobalProvider';
 import { supabase } from '../../utils/SupaBaseConfig';
 
-const Home = () => {
-  const { user, isLoading } = useGlobalContext(); // Get the user and loading state from context
+const home = () => {
+  const { user, isLoading } = useGlobalContext();
 
   useEffect(() => {
     if (user) {
       getCategoryList();
     }
-  }, [user]); 
+  }, [user]);
+
+  const getCategoryList = async () => {
+    const { data, error } = await supabase
+      .from('Category')
+      .select('*')
+      .eq('created_by', user.email);
+
+    if (error) {
+      console.error('Error fetching categories:', error);
+    } else {
+      console.log('Fetched categories:', data);
+    }
+  };
 
   if (isLoading) {
     return (
-      <SafeAreaView style={styles.container}>
-        <ActivityIndicator size="large" color="#ffffff" />
-        <Text style={styles.loadingText}>Loading...</Text>
-      </SafeAreaView>
+      <SafeAreaView className="bg-primary h-full justify-center items-center">
+      <ActivityIndicator size="large" color="#ffffff" />
+      <Text className="text-lg text-secondary-100 mt-4">Loading...</Text>
+    </SafeAreaView>
     );
   }
 
-  const getCategoryList=async()=>{
-    const {data,error}= await supabase.from('Category')
-    .select('*')
-    .eq('created_by',user.email)
-
-    console.log(data);
-  }
-
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView className="bg-black-200 h-full">
       <StatusBar style="light" />
-      <View style={styles.content}>
-        <Text style={styles.title}>Welcome to SmartSpend</Text>
+      <View className="flex-1 justify-center items-center">
+        <Text className="text-2xl font-semibold text-white">Welcome to SmartSpend</Text>
         {user && (
-          <>
-            <Text style={styles.subtitle}>Hello, {user.username}!</Text>
+          <View className="flex-row items-center mt-4">
             {user.avatar && (
               <Image
                 source={{ uri: user.avatar }}
-                style={styles.avatar}
+                className="w-12 h-12 rounded-full mr-4"
               />
             )}
-          </>
+            <Text className="text-xl font-semibold text-white">Hello, {user.username}!</Text>
+          </View>
         )}
       </View>
     </SafeAreaView>
   );
 };
 
-export default Home;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#1F2937', // Tailwind color bg-primary
-  },
-  content: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  title: {
-    fontSize: 24,
-    fontWeight: '600', // Tailwind class font-psemibold
-    color: '#FFFFFF',
-  },
-  subtitle: {
-    fontSize: 20,
-    fontWeight: '600', // Tailwind class font-psemibold
-    color: '#FFFFFF',
-    marginTop: 10,
-  },
-  avatar: {
-    width: 100,
-    height: 100,
-    borderRadius: 50,
-    marginTop: 20,
-  },
-  loadingText: {
-    fontSize: 18,
-    color: '#CBD5E1', // Tailwind color text-secondary-100
-    marginTop: 10,
-  },
-});
+export default home;
