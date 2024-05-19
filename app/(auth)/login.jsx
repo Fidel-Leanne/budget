@@ -7,6 +7,8 @@ import CustomButton from '../../components/CustomButton';
 import { Link, useRouter } from 'expo-router';
 import { signIn } from '../../lib/appwrite';
 
+
+
 const SignIn = () => {
   const router = useRouter();
 
@@ -35,6 +37,8 @@ const SignIn = () => {
     try {
       const result = await signIn(form.email, form.password);
       // Set to global state if needed
+
+      
       router.replace('/home');
     } catch (error) {
       Alert.alert('Error', error.message);
