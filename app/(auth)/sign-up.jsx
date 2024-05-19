@@ -1,14 +1,16 @@
 import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
 import React, { useState } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { images } from '../../constants';
+import { images } from '../../constants'; // Assuming you use these elsewhere
 import FormField from '../../components/FormField';
 import CustomButton from '../../components/CustomButton';
 import { Link, useRouter } from 'expo-router';
-import { createUser } from '../../lib/appwrite';
+import { createUser, getCurrentUser } from '../../lib/appwrite';
+import { useGlobalContext } from '../../context/GlobalProvider'; // Import your global context
 
 const SignUp = () => {
   const router = useRouter();
+  const { setIsLoggedIn, setUser } = useGlobalContext(); // Destructure global context methods
   const [form, setForm] = useState({
     username: '',
     email: '',
@@ -33,7 +35,12 @@ const SignUp = () => {
 
     try {
       const result = await createUser(form.email, form.password, form.username);
-      // Set to global state if needed
+      const currentUser = await getCurrentUser();
+      setIsLoggedIn(true);
+      setUser(currentUser);
+
+      
+
       router.replace('/home');
     } catch (error) {
       Alert.alert('Error', error.message);
