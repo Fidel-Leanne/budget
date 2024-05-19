@@ -4,6 +4,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useGlobalContext } from '../../context/GlobalProvider';
 import { supabase } from '../../utils/SupaBaseConfig';
+import Header from '../../components/Header';
+import CircularChart from '../../components/CircularChart';
 
 const home = () => {
   const { user, isLoading } = useGlobalContext();
@@ -39,20 +41,11 @@ const home = () => {
   return (
     <SafeAreaView className="bg-black-200 h-full">
       <StatusBar style="light" />
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-2xl font-semibold text-white">Welcome to SmartSpend</Text>
-        {user && (
-          <View className="flex-row items-center mt-4">
-            {user.avatar && (
-              <Image
-                source={{ uri: user.avatar }}
-                className="w-12 h-12 rounded-full mr-4"
-              />
-            )}
-            <Text className="text-xl font-semibold text-white">Hello, {user.username}!</Text>
-          </View>
-        )}
-      </View>
+    
+      <Header/>
+      <CircularChart/>
+     
+      
     </SafeAreaView>
   );
 };
