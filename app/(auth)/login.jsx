@@ -1,74 +1,93 @@
-import { ScrollView, StyleSheet, Text, View, Image } from 'react-native'
-import React from 'react'
-import { SafeAreaView } from 'react-native-safe-area-context'
-import { images } from '../../constants'
-import FormField from '../../components/FormField'
-import { useState } from 'react'
-import CustomButton from '../../components/CustomButton'
-import { Link, useRouter } from 'expo-router'
+import { ScrollView, StyleSheet, Text, View, Alert } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { images } from '../../constants'; // Assuming you use these elsewhere
+import FormField from '../../components/FormField';
+import CustomButton from '../../components/CustomButton';
+import { Link, useRouter } from 'expo-router';
+import { signIn } from '../../lib/appwrite';
 
 const SignIn = () => {
+  const router = useRouter();
 
-    const router=useRouter()
-
-  const [form, setForm]= useState({
+  const [form, setForm] = useState({
     email: '',
     password: ''
-  })
+  });
 
-  const [isSubmitting, setisSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const submit=()=>{
+  const handleChangeText = (field, value) => {
+    setForm(prevForm => ({
+      ...prevForm,
+      [field]: value
+    }));
+  };
 
-    router.replace('/home')
-  }
+  const submit = async () => {
+    if (!form.password || !form.email) {
+      Alert.alert('Please fill in all required fields');
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const result = await signIn(form.email, form.password);
+      // Set to global state if needed
+      router.replace('/home');
+    } catch (error) {
+      Alert.alert('Error', error.message);
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
-    <SafeAreaView className='bg-primary h-full'>
-
+    <SafeAreaView className="bg-primary h-full">
       <ScrollView>
-      <View className='w-full justify-center min-h-85vh px-4 my-6'>
-       
+        <View className="w-full justify-center min-h-85vh px-4 my-6">
+          <Text className="text-2xl text-white font-semibold mt-10">
+            Login to SmartSpend
+          </Text>
 
-       <Text className='text-2xl text-white text-semibold mt-10 font-psemibold'>
-        Login to SmartSpend
-       </Text>
+          <FormField
+            title="Email"
+            value={form.email}
+            handleChangeText={(value) => handleChangeText('email', value)}
+            otherStyles="mt-7"
+            keyboardType="email-address"
+          />
 
-       <FormField
-       title='Email'
-       value={form.email}
-       handleChangeText={(e)=>setForm({email: e})}
-       otherStyles='mt-7'
-       keyboardType='email-address'
-       />
-
-      <FormField
-            title='Password'
+          <FormField
+            title="Password"
             value={form.password}
-            handleChangeText={(e)=>setForm({password: e})}
-            otherStyles='mt-7'
-            />
+            handleChangeText={(value) => handleChangeText('password', value)}
+            otherStyles="mt-7"
+            secureTextEntry
+          />
 
-            <CustomButton
-            title='Sign in'
+          <CustomButton
+            title="Sign in"
             handlePress={submit}
-            containerStyles='mt-5 mx-4'
-            isLoading={isSubmitting}/>
+            containerStyles="mt-5 mx-4"
+            isLoading={isSubmitting}
+          />
 
-            <View className='justify-center pt-5 flex-row gap-2'>
-
-              <Text className='text-lg text-gray-100 font-pregular'>
-                 Don't have an account
-              </Text>
-              <Link href='/sign-up' className='text-lg font-psemibold text-blue-300'> Sign Up</Link>
-            </View>
-      </View>
-
+          <View className="justify-center pt-5 flex-row gap-2">
+            <Text className="text-lg text-gray-100">
+              Don't have an account?
+            </Text>
+            <Link href="/sign-up" className="text-lg font-semibold text-blue-300">
+              Sign Up
+            </Link>
+          </View>
+        </View>
       </ScrollView>
-      
     </SafeAreaView>
-  )
-}
+  );
+};
 
-export default SignIn
+export default SignIn;
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({});
