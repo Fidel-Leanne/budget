@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { useRouter } from 'expo-router';
 import Colors from '../utils/Colors';
+import ColorPicker from '../components/ColorPicker';
 
 const AddNewCategory = () => {
   const [selectedIcon, setSelectedIcon] = useState('IC');
@@ -25,6 +26,13 @@ const AddNewCategory = () => {
           className="text-3xl text-center mt-8 w-[90px] rounded-full mx-auto "
         />
       </View>
+
+      
+
+      <ColorPicker
+      selectedColor={selectedColor}
+      setSelectedColor={(color)=>setSelectedColor(color)}
+      />
     </SafeAreaView>
   );
 };
