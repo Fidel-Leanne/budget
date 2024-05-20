@@ -7,12 +7,12 @@ const Header = () => {
   const { user, isLoading } = useGlobalContext();
 
   return (
-    <View className="h-[90px] bg-slate-700 flex ">
+    <View className="h-[100px] bg-slate-700 flex ">
       <View className="flex-row items-center">
         {user && user.avatar && (
           <Image
             source={{ uri: user.avatar }}
-            className="w-12 h-12 rounded-full mr-5 mt-1"
+            className="w-12 h-12 rounded-full mr-5 mt-1 ml-2"
            // Set marginLeft to 0 for the image
           />
         )}
@@ -20,7 +20,7 @@ const Header = () => {
       </View>
       <View className="flex-row items-center mt-2">
         {/* Notification Icon */}
-        <Feather name="bell" size={24} color="white" className='mr-4 mt'/>
+        <Feather name="bell" size={24} color="white" className='mr-4 ml-1'/>
         {/* User Greeting */}
         {user && (
           <Text className="text-xl font-pregular text-white ml-9">Hello, {user.username}!</Text>

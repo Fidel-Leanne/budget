@@ -37,8 +37,14 @@ const RootLayout = () => {
 
     <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
     <Stack.Screen name="(auth)" options={{ headerShown: false }} />
-
-    {/* <Stack.Screen name='/search/[query]' options={{headerShown:false}}/> */}
+    <Stack.Screen name='add-new-category'
+        options={{
+          presentation:'modal',
+          headerShown:true,
+          headerTitle:'Add New Category'
+        }}
+      />
+   
 
 
     
