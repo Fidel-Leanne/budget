@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native'
 import React, { useState } from 'react'
 import PieChart from 'react-native-pie-chart'
 import Colors from '../utils/Colors'
+import { Feather } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 const CircularChart = () => {
@@ -13,7 +14,7 @@ const CircularChart = () => {
   return (
     <View>
       <Text className='text-white font-psemibold mt-3 mb-5 '>Your Expenses</Text>
-      <View className='h-[230px] w-[350px] bg-slate-500  ml-5 rounded-xl ' >
+      <View className='h-[230px] w-[350px]   ml-5 rounded-xl ' >
 
         <Text className='text-white text-center font-pregular mb-5 mt-2'>Your Estimated Cost: <Text className="font-pbold">N$0</Text></Text>
         <View className='flex-row '>
@@ -22,16 +23,12 @@ const CircularChart = () => {
                 widthAndHeight={widthAndHeight}
                 series={values}
                 sliceColor={sliceColor}
-                coverRadius={0.6}
-                coverFill={'#FFF'}
+                coverRadius={0.7}
+                coverFill={''}
                 className='ml-2'
             />
 
-            <MaterialCommunityIcons 
-                        name="checkbox-blank-circle" 
-                        size={24} color={Colors.GRAY}
-                        className='ml-9'
-                         />
+            <Feather name="box" size={24} color="white" />
                 <Text className='text-white'>NA</Text>
 
         </View>

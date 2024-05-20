@@ -67,8 +67,10 @@ const AddNewCategory = () => {
           />
         </View>   
         
-        <TouchableOpacity className='bg-black w-[300px] h-9 rounded-full mt-5'>
-            <Text className="text-secondary text-2xl font-pregular text-center">Add Category</Text>   
+        <TouchableOpacity className='bg-black w-[300px] h-9 rounded-full mt-5'
+            disabled={!categoryName && !totalBudget}>
+                <Text className="text-secondary text-2xl font-pregular text-center">
+                    Add Category</Text>   
         </TouchableOpacity>
 
       </View>
