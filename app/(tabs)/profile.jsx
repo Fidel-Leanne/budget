@@ -6,6 +6,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import Sidebar from '../../components/Sidebar';
 import { images } from '../../constants';
 
+
 const Profile = () => {
   const { user, isLoading } = useGlobalContext();
   const [isSidebarVisible, setSidebarVisible] = useState(false);
@@ -16,14 +17,14 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <SafeAreaView className="flex-1 bg-primary justify-center items-center">
+      <SafeAreaView className="flex-1 bg-white justify-center items-center">
         <Text className="text-lg text-white">Loading...</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-primary">
+    <SafeAreaView className="flex-1  bg-slate-700">
       <StatusBar style="light" />
       <View className="flex-row justify-between p-4 items-center">
         <TouchableOpacity onPress={toggleSidebar}>
@@ -49,7 +50,7 @@ const Profile = () => {
       <View className="flex-1 items-center mt-6">
         <Image
           source={images.card}
-          className="w-[400px] h-[300px] mx-auto mt-7"
+          className="w-[400px] h-[300px] mx-auto mt-[70px]"
           resizeMode="contain"
         />
       </View>

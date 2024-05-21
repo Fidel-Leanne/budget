@@ -16,7 +16,7 @@ const Sidebar = ({ isVisible, onClose }) => {
 
   return (
     <TouchableWithoutFeedback onPress={handlePressOutside}>
-         <SafeAreaView className="absolute top-0 left-0 h-[690px] w-[250px] bg-gray-900 bg-opacity-70 shadow-lg z-50 mt-6 rounded-3xl ">
+         <SafeAreaView className="absolute top-0 left-0 h-[690px] w-[250px] bg-gray-900 bg-opacity-25  shadow-lg z-50 mt-8 rounded-3xl ">
       <View className="p-4">
         <TouchableOpacity onPress={onClose} className="mb-4">
           <MaterialIcons name="close" size={24} color="white" />
