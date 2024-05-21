@@ -1,10 +1,18 @@
-import React from 'react';
-import { SafeAreaView, Text, View, Image } from 'react-native';
+import React, { useState } from 'react';
+import { SafeAreaView, Text, View, Image, TouchableOpacity } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { useGlobalContext } from '../../context/GlobalProvider'; // Import the global context
+import { useGlobalContext } from '../../context/GlobalProvider';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import Sidebar from '../../components/Sidebar';
+import { images } from '../../constants';
 
 const Profile = () => {
-  const { user, isLoading } = useGlobalContext(); // Get the user and loading state from context
+  const { user, isLoading } = useGlobalContext();
+  const [isSidebarVisible, setSidebarVisible] = useState(false);
+
+  const toggleSidebar = () => {
+    setSidebarVisible(!isSidebarVisible);
+  };
 
   if (isLoading) {
     return (
@@ -15,21 +23,37 @@ const Profile = () => {
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-primary ">
+    <SafeAreaView className="flex-1 bg-primary">
       <StatusBar style="light" />
-      <View className="flex-1 mt-7">
-        <Text className="text-2xl font-bold text-white ">Profile</Text>
-        {user && (
-          <View className="items-center">
+      <View className="flex-row justify-between p-4 items-center">
+        <TouchableOpacity onPress={toggleSidebar}>
+          <MaterialCommunityIcons name="menu" size={40} color="orange"  />
+        </TouchableOpacity>
+        
+        <View>
+          {user && (
             <Image
               source={{ uri: user.avatarUrl }}
-              className="w-24 h-24 rounded-full mb-5"
+              className="w-10 h-10 rounded-full mt-3"
             />
-            <Text className="text-lg text-white mb-2">Username: {user.username}</Text>
-            <Text className="text-lg text-white mb-2">Email: {user.email}</Text>
-          </View>
-        )}
+          )}
+        </View>
+
+       
       </View>
+
+      <View>
+          <Text className="text-lg font-pmedium text-white text-center"> {user.username}</Text>
+          <Text className="text-lg font-pmedium text-white text-center">{user.email}</Text>
+        </View>
+      <View className="flex-1 items-center mt-6">
+        <Image
+          source={images.card}
+          className="w-[400px] h-[300px] mx-auto mt-7"
+          resizeMode="contain"
+        />
+      </View>
+      <Sidebar isVisible={isSidebarVisible} onClose={toggleSidebar} />
     </SafeAreaView>
   );
 };

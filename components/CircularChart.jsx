@@ -16,7 +16,7 @@ const CircularChart = () => {
       <Text className='text-white font-psemibold mt-3 mb-5 '>Your Expenses</Text>
       <View className='h-[230px] w-[350px]   ml-5 rounded-xl ' >
 
-        <Text className='text-white text-center font-pregular mb-5 mt-2'>Your Estimated Cost: <Text className="font-pbold">N$0</Text></Text>
+        <Text className='text-white text-center font-pregular mb-5 mt-2'><Text className="font-pbold">N$0</Text></Text>
         <View className='flex-row '>
   
             <PieChart
