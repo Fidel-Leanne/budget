@@ -8,6 +8,7 @@ import Header from '../../components/Header';
 import CircularChart from '../../components/CircularChart';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
+import CategoryList from '../../components/CategoryList';
 
 const home = () => {
   const { user, isLoading } = useGlobalContext();
@@ -46,6 +47,7 @@ const home = () => {
     
       <Header />
       <CircularChart/>
+      <CategoryList/>
 
       <View className="absolute bottom-0 right-0 mb-8 mr-8">
         <Link href='/add-new-category'>
