@@ -10,7 +10,7 @@ const CircularChart = () => {
   const [sliceColor, setSliceColor] = useState([Colors.GRAY]);
 
   return (
-    <View className=" bg-slate-700 mt-5 rounded-xl w-[350px] ml-5 items-center p-4">
+    <View className=" bg-slate-700/50 mt-5 rounded-xl w-[350px] ml-5 items-center p-4">
       <Text className="text-white font-psemibold mt-0 mb-5">Your Expenses</Text>
       <View className="h-[180px] w-[330px] ml-5 rounded-xl items-center flex-row justify-center">
         <View className="relative items-center justify-center mt-0 ml-0">
