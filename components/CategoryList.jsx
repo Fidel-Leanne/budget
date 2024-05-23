@@ -1,7 +1,19 @@
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import React from 'react';
+import { useRouter } from 'expo-router'
 
 const CategoryList = ({ categories }) => {
+  const router=useRouter();
+
+  const onCategoryClick=(category)=>{
+    router.push({
+        pathname:'/category-detail',
+        params:{
+            categoryId:category.id
+        }
+    })
+}
+
   return (
     <View className="flex-1">
       <View>
@@ -9,10 +21,12 @@ const CategoryList = ({ categories }) => {
           Latest Expenses
         </Text>
       </View>
-      <ScrollView>
+
+
+   
         <View>
           {categories.map((category) => (
-            <View key={category.id} className="ml-4 mt-4">
+            <TouchableOpacity key={category.id} className="ml-4 mt-4" onPress={()=>onCategoryClick(category)}>
               <View className="bg-slate-200/50 w-[350px] rounded-lg h-auto flex-row items-center p-2">
                 <Text style={[styles.iconText, { backgroundColor: category?.color }]}>
                   {category.icon}
@@ -25,10 +39,10 @@ const CategoryList = ({ categories }) => {
                   <Text className="text-white font-psemibold">N$5000</Text>
                 </View>
               </View>
-            </View>
+            </TouchableOpacity>
           ))}
         </View>
-      </ScrollView>
+      
     </View>
   );
 };

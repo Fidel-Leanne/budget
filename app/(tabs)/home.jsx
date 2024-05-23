@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Text, View, ActivityIndicator } from 'react-native';
+import { Text, View, ActivityIndicator, ScrollView, RefreshControl } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StatusBar } from 'expo-status-bar';
 import { useGlobalContext } from '../../context/GlobalProvider';
@@ -9,7 +9,6 @@ import CircularChart from '../../components/CircularChart';
 import { Ionicons } from '@expo/vector-icons';
 import { Link } from 'expo-router';
 import CategoryList from '../../components/CategoryList';
-import { ScrollView } from 'react-native-gesture-handler';
 
 const Home = () => {
   const { user, isLoading } = useGlobalContext();
@@ -50,11 +49,19 @@ const Home = () => {
 
   return (
     <SafeAreaView className="bg-primary h-full">
-      
       <StatusBar style="light" />
       <Header />
-      <CircularChart />
-      {categoryList.length > 0 && <CategoryList categories={categoryList} />}
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            onRefresh={() => getCategoryList()}
+            refreshing={loading}
+          />
+        }
+      >
+        <CircularChart />
+        {categoryList.length > 0 && <CategoryList categories={categoryList} />}
+      </ScrollView>
       <View className="absolute bottom-0 right-0 mb-8 mr-8">
         <Link href="/add-new-category">
           <Ionicons name="add-circle-outline" size={50} color="orange" />
