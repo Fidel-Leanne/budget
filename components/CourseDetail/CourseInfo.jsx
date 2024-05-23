@@ -205,29 +205,29 @@ const CourseInfo = ({ categoryData }) => {
       </Modal>
 
       <Modal isVisible={isAddItemModalVisible} onBackdropPress={closeAddItemModal} avoidKeyboard>
-        <View className="rounded-lg p-4 bg-slate-400">
+        <View className="rounded-lg p-4 bg-slate-300">
           <Text className="text-lg font-pbold mb-4">Add New Item</Text>
           <TextInput
-            className="border border-gray-300 p-2 mb-4 font-pregular rounded-md "
+            className="border border-black-300 p-2 mb-4 font-pregular rounded-md "
             placeholder="Item Name"
             value={newItemName}
             onChangeText={setNewItemName}
             />
             <TextInput
-              className="border border-gray-300 p-2 mb-4 rounded-md font-pregular"
+              className="border font-pregular border-black-300 p-2 mb-4 rounded-md "
               placeholder="Item Cost"
               keyboardType="numeric"
               value={newItemCost}
               onChangeText={setNewItemCost}
             />
             <TextInput
-              className="border border-gray-300 p-2 mb-4 rounded-md font-pregular"
+              className="border border-black-300 p-2 mb-4 rounded-md font-pregular"
               placeholder="Item URL"
               value={newItemUrl}
               onChangeText={setNewItemUrl}
             />
             <TextInput
-              className="border border-gray-300 p-2 mb-4 rounded-md font-pregular"
+              className="border border-black-300 p-2 mb-4 rounded-md font-pregular"
               placeholder="Item Image URL"
               value={newItemImage}
               onChangeText={setNewItemImage}

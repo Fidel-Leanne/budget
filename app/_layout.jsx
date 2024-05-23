@@ -45,15 +45,7 @@ const RootLayout = () => {
         }}
       />
 
-<Stack.Screen
-        name='add-new-category-item'
-        options={{
-          presentation:'modal',
-          headerShown:true,
-          headerTitle:'Add New Item'
-        }}
-      />
-   
+
 
 
     
