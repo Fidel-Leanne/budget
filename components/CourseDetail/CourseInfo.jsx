@@ -168,12 +168,12 @@ const CourseInfo = ({ categoryData }) => {
         <Text className="text-xl text-white font-pbold mt-4 mb-3">Total Budget: ${categoryData.assigned_budget}</Text>
       </View>
       <TouchableOpacity
-        className="bg-blue-600/30 p-4 rounded-full absolute bottom-20 left-4 ml-[-11] mt-2 self-center shadow-lg"
+        className="bg-blue-600/30 p-4 rounded-full absolute  bottom-16 left-4 ml-[-11] mt-2 self-center shadow-lg"
         onPress={openItemListModal}
       >
         <View className="flex-row items-center">
           <Ionicons name="list" size={30} color="white" />
-          <Text className="text-white font-bold ml-2">View Items</Text>
+          <Text className="text-white font-pbold ml-2">View Items</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -182,7 +182,7 @@ const CourseInfo = ({ categoryData }) => {
       >
         <View className="flex-row items-center">
           <Ionicons name="add-circle-outline" size={30} color="white" />
-          <Text className="text-white font-bold ml-2">Add Item</Text>
+          <Text className="text-white font-pbold ml-2">Add Item</Text>
         </View>
       </TouchableOpacity>
       <TouchableOpacity
@@ -206,38 +206,42 @@ const CourseInfo = ({ categoryData }) => {
 
       <Modal isVisible={isAddItemModalVisible} onBackdropPress={closeAddItemModal} avoidKeyboard>
         <View className="rounded-lg p-4 bg-slate-400">
-          <Text className="text-lg font-bold mb-4">Add New Item</Text>
+          <Text className="text-lg font-pbold mb-4">Add New Item</Text>
           <TextInput
-            className="border border-gray-300 p-2 mb-4 rounded-md"
+            className="border border-gray-300 p-2 mb-4 font-pregular rounded-md "
             placeholder="Item Name"
             value={newItemName}
             onChangeText={setNewItemName}
             />
             <TextInput
-              className="border border-gray-300 p-2 mb-4 rounded-md"
+              className="border border-gray-300 p-2 mb-4 rounded-md font-pregular"
               placeholder="Item Cost"
               keyboardType="numeric"
               value={newItemCost}
               onChangeText={setNewItemCost}
             />
             <TextInput
-              className="border border-gray-300 p-2 mb-4 rounded-md"
+              className="border border-gray-300 p-2 mb-4 rounded-md font-pregular"
               placeholder="Item URL"
               value={newItemUrl}
               onChangeText={setNewItemUrl}
             />
             <TextInput
-              className="border border-gray-300 p-2 mb-4 rounded-md"
+              className="border border-gray-300 p-2 mb-4 rounded-md font-pregular"
               placeholder="Item Image URL"
               value={newItemImage}
               onChangeText={setNewItemImage}
             />
-            <TouchableOpacity className="bg-green-600 px-4 py-2 rounded-xl mt-4" onPress={onAddItem}>
-              <Text className="text-white font-bold">Add Item</Text>
-            </TouchableOpacity>
-            <TouchableOpacity className="bg-red-600 px-4 py-2 rounded-xl mt-4" onPress={closeAddItemModal}>
-              <Text className="text-white font-bold">Cancel</Text>
-            </TouchableOpacity>
+
+            <View className='flex-row'>
+                <TouchableOpacity className="bg-green-600 px-4 py-2 rounded-xl mt-4" onPress={onAddItem}>
+                  <Text className="text-white font-pbold">Add Item</Text>
+                </TouchableOpacity>
+                <TouchableOpacity className="bg-red-600 px-4 py-2 rounded-xl ml-28 mt-4 " onPress={closeAddItemModal}>
+                  <Text className="text-white font-pbold">Cancel</Text>
+                </TouchableOpacity>
+            </View>
+           
           </View>
         </Modal>
       </View>
