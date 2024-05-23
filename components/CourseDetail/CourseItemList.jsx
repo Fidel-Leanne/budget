@@ -4,13 +4,13 @@ import Colors from '../../utils/Colors';
 import { EvilIcons } from '@expo/vector-icons';
 import { supabase } from '../../utils/SupaBaseConfig';
 
-export default function CourseItemList({ categoryData, setUpdateRecord }) {
+export default function CourseItemList({ categoryData}) {
   const [explandItem, setExpandItem] = useState();
 
   const onDeleteItem = async (id) => {
     const { error } = await supabase.from('CategoryItems').delete().eq('id', id);
     ToastAndroid.show('Item Deleted!', ToastAndroid.SHORT);
-    setUpdateRecord(true);
+   
   };
 
   const openURL = (url) => {
