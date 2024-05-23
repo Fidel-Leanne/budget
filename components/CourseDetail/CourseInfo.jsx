@@ -126,13 +126,13 @@ const CourseInfo = ({ categoryData }) => {
       </TouchableOpacity>
 
       <Modal isVisible={isModalVisible} onBackdropPress={closeModal}>
-        <View className="bg-white rounded-lg p-4">
+        <View className="bg-white rounded-lg h-3/6 p-4">
           <CourseItemList categoryData={categoryData} />
           <TouchableOpacity
-            className="bg-blue-600 px-4 py-2 rounded-md mt-4 self-end"
+            className="bg-blue-600 px-4 py-2 rounded-md mt-[120px] self-end"
             onPress={closeModal}
           >
-            <Text className="text-white font-bold">Close</Text>
+            <Text className="text-white font-bold ">Close</Text>
           </TouchableOpacity>
         </View>
       </Modal>
