@@ -1,8 +1,9 @@
-import { SafeAreaView, Text, View } from 'react-native';
+import { SafeAreaView, Text, View, ActivityIndicator } from 'react-native';
 import React, { useEffect, useState } from 'react';
 import { useLocalSearchParams } from 'expo-router';
 import { supabase } from '../utils/SupaBaseConfig';
 import { StatusBar } from 'expo-status-bar';
+import CourseInfo from '../components/CourseDetail/CourseInfo';
 
 const CategoryDetails = () => {
   const { categoryId } = useLocalSearchParams();
@@ -30,23 +31,17 @@ const CategoryDetails = () => {
 
   if (!categoryData) {
     return (
-      <SafeAreaView className="flex-1 justify-center items-center">
-        <StatusBar style="dark" />
-        <Text>Loading...</Text>
+        <SafeAreaView className="bg-primary h-full justify-center items-center">
+        <ActivityIndicator size="large" color="#ffffff" />
+        <Text className="text-lg text-secondary-100 mt-4">Loading...</Text>
       </SafeAreaView>
     );
   }
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-slate-600">
       <StatusBar style="dark" />
-      <View className="flex-1 justify-center items-center">
-        <Text className="text-4xl">{categoryData.icon}</Text>
-        <Text className="text-xl font-bold mt-4">{categoryData.name}</Text>
-        <Text className="text-sm text-gray-500 mt-2">
-          {categoryData.CategoryItems?.length} Items
-        </Text>
-      </View>
+      <CourseInfo categoryData={categoryData}/>
     </SafeAreaView>
   );
 };
