@@ -125,7 +125,7 @@ const CourseInfo = ({ categoryData }) => {
         <Ionicons name="trash-bin-outline" size={30} color="white" />
       </TouchableOpacity>
 
-      <Modal isVisible={isModalVisible} onBackdropPress={closeModal}>
+      <Modal isVisible={isModalVisible} onBackdropPress={closeModal} avoidKeyboard>
         <View className="bg-white rounded-lg h-3/6 p-4">
           <CourseItemList categoryData={categoryData} />
           <TouchableOpacity
