@@ -4,6 +4,7 @@ import { useLocalSearchParams } from 'expo-router';
 import { supabase } from '../utils/SupaBaseConfig';
 import { StatusBar } from 'expo-status-bar';
 import CourseInfo from '../components/CourseDetail/CourseInfo';
+import CourseItemList from '../components/CourseDetail/CourseItemList';
 
 const CategoryDetails = () => {
   const { categoryId } = useLocalSearchParams();
@@ -42,6 +43,7 @@ const CategoryDetails = () => {
     <SafeAreaView className="flex-1 bg-slate-600">
       <StatusBar style="dark" />
       <CourseInfo categoryData={categoryData}/>
+
     </SafeAreaView>
   );
 };
