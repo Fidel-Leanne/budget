@@ -1,9 +1,9 @@
-import { View, Text, TouchableOpacity, Alert, ToastAndroid } from 'react-native';
 import React, { useEffect, useState } from 'react';
+import { View, Text, TouchableOpacity, Alert, ToastAndroid, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRouter } from 'expo-router';
 import { supabase } from '../../utils/SupaBaseConfig';
-import * as Progress from 'react-native-progress';
+import { AnimatedCircularProgress } from 'react-native-circular-progress';
 
 const CourseInfo = ({ categoryData }) => {
   const [totalCost, setTotalCost] = useState(0);
@@ -26,7 +26,7 @@ const CourseInfo = ({ categoryData }) => {
     if (perc > 100) {
       perc = 100;
     }
-    setPercTotal(perc / 100); // For the progress bar, we need a value between 0 and 1
+    setPercTotal(perc);
   };
 
   const onDeleteCategory = () => {
@@ -61,33 +61,35 @@ const CourseInfo = ({ categoryData }) => {
   };
 
   return (
-    <View className="flex-1 bg-slate-700 p-4">
+    <View className="flex-1 bg-slate-800 p-6">
       <View className="items-center mt-10">
-        <Text className={`text-4xl p-4 rounded-lg`} style={{ backgroundColor: categoryData.color }}>
+        <Text className={`text-5xl p-6 rounded-lg shadow-lg`} style={{ backgroundColor: categoryData.color }}>
           {categoryData.icon}
         </Text>
-        <Text className="text-2xl text-white font-bold mt-4">{categoryData?.name}</Text>
-        <Text className="text-sm text-gray-300 mt-2">{categoryData?.CategoryItems?.length} Items</Text>
+        <Text className="text-3xl text-white font-bold mt-6">{categoryData?.name}</Text>
+        <Text className="text-base text-gray-300 mt-2">{categoryData?.CategoryItems?.length} Items</Text>
       </View>
-      <View className="mt-10 w-full">
-        <View className="flex-row justify-between mt-4">
-          <Text className="text-white font-bold text-lg">${totalCost}</Text>
-          <Text className="text-white text-lg">Total Budget: ${categoryData.assigned_budget}</Text>
-        </View>
-        <View className="w-full mt-4">
-          <Progress.Bar
-            progress={percTotal}
-            width={null}
-            color="green"
-            unfilledColor="grey"
-            borderWidth={0}
-            height={20}
-            borderRadius={10}
-          />
-        </View>
+      <View className="mt-12 w-full items-center">
+        <Text className="text-2xl text-white font-extrabold mb-4">${totalCost}</Text>
+        <AnimatedCircularProgress
+          size={200}
+          width={20}
+          fill={percTotal}
+          tintColor="#4caf50"
+          backgroundColor="#3d5875"
+          rotation={0}
+          lineCap="round"
+        >
+          {() => (
+            <View className="items-center">
+              <Text className="text-xl text-white">Progress</Text>
+            </View>
+          )}
+        </AnimatedCircularProgress>
+        <Text className="text-xl text-white font-bold mt-4">Total Budget: ${categoryData.assigned_budget}</Text>
       </View>
       <TouchableOpacity
-        className="bg-red-600 p-4 rounded-full absolute bottom-10 self-center"
+        className="bg-red-600 p-4 rounded-full absolute bottom-10 self-center shadow-lg"
         onPress={onDeleteCategory}
       >
         <Ionicons name="trash-bin-outline" size={30} color="white" />
@@ -97,3 +99,5 @@ const CourseInfo = ({ categoryData }) => {
 };
 
 export default CourseInfo;
+
+
