@@ -56,7 +56,7 @@ const CircularChart = ({ categoryList }) => {
 
   return (
     <View className="bg-slate-700/50 mt-5 rounded-xl w-[350px] mx-auto items-center p-6">
-      <Text className="text-white font-semibold text-lg mb-5">
+      <Text className="text-white font-psemibold text-lg mb-5">
         Total Estimate: <Text className="font-bold">${totalCalculatedEstimate}</Text>
       </Text>
       <Animated.View
@@ -87,7 +87,7 @@ const CircularChart = ({ categoryList }) => {
                   size={24}
                   color={Colors.COLOR_LIST[index % Colors.COLOR_LIST.length]}
                 />
-                <Text className="text-white ml-2">{index < 4 ? category.name : 'Other'}</Text>
+                <Text className="text-secondary-200 font-pmedium ml-2">{index < 4 ? category.name : 'Other'}</Text>
               </View>
             ))
           )}
