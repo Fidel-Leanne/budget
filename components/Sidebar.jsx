@@ -2,9 +2,12 @@ import React from 'react';
 import { View, Text, TouchableOpacity, SafeAreaView, TouchableWithoutFeedback } from 'react-native';
 import { useRouter } from 'expo-router';
 import { MaterialIcons } from '@expo/vector-icons';
+import { signOut } from '../lib/appwrite';
+import { useGlobalContext } from '../context/GlobalProvider';
 
 const Sidebar = ({ isVisible, onClose }) => {
   const router = useRouter();
+  const { user, setUser, setIsLogged } = useGlobalContext();
 
   const handlePressOutside = () => {
     if (isVisible) {
@@ -15,8 +18,12 @@ const Sidebar = ({ isVisible, onClose }) => {
 
   if (!isVisible) return null;
 
-  const logout = () => {
-     router.replace('/(auth)')
+  const logout = async () => {
+    await signOut();
+    setUser(null);
+    setIsLogged(false);
+
+    router.replace("/sign-in");
   }
 
   return (
@@ -41,7 +48,7 @@ const Sidebar = ({ isVisible, onClose }) => {
         <TouchableOpacity onPress={() => { router.push('/settings'); onClose(); }} className="mb-4">
           <Text className="text-gray-300 font-psemibold text-lg">Settings</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => { /* Add logout functionality here */ onClose(); }} className="mt-[370px] bg-slate-700 rounded-xl">
+        <TouchableOpacity onPress={() => {logout}} className="mt-[370px] bg-slate-700 rounded-xl">
           <Text className="text-orange-500 text-lg text-center font-psemibold h-9 ">Logout</Text>
         </TouchableOpacity>
       </View>

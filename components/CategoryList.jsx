@@ -28,7 +28,7 @@ const CategoryList = ({ categories, onRefresh }) => {
   }, [onRefresh]);
 
   return (
-    <View className="flex-1 bg-slate-800">
+    <View className="flex-1 ">
       <Text className="text-slate-50 font-psemibold text-lg mt-3 ml-3">
         Latest Expenses
       </Text>

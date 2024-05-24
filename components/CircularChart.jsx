@@ -69,9 +69,9 @@ const CircularChart = ({ categoryList }) => {
             series={values}
             sliceColor={sliceColor}
             coverRadius={0.65}
-            coverFill={'#FFF'}
+            coverFill={''}
           />
-          <Text style={styles.currencyText}>N${totalCalculatedEstimate}</Text>
+          
         </View>
         <View className="flex-col items-start ml-4">
           {categoryList.length === 0 ? (

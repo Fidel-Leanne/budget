@@ -23,6 +23,8 @@ const Profile = () => {
     );
   }
 
+  
+
   return (
     <SafeAreaView className="flex-1  bg-slate-700">
       <StatusBar style="light" />

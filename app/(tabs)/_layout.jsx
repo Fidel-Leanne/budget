@@ -58,13 +58,13 @@ const TabsLayout = () => {
               
               name="bookmark"
               options={{
-                title: 'Bookmark',
+                title: 'About',
                 headerShown: false,
                 tabBarIcon:({color, focused})=>(
                     <TabIcon
                     icon={icons.bookmark}
                     color={color}
-                    name="Bookmark"
+                    name="About"
                     focused={focused}
                     />
                 )
