@@ -1,13 +1,51 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PieChart from 'react-native-pie-chart';
 import Colors from '../utils/Colors';
 import { Feather } from '@expo/vector-icons';
 
-const CircularChart = () => {
+const CircularChart = ({ categoryList }) => {
   const widthAndHeight = 180; // Reduced size for better fit
   const [values, setValues] = useState([1]);
   const [sliceColor, setSliceColor] = useState([Colors.GRAY]);
+  const [totalCalculatedEstimate, setTotalCalculatedEstimate] = useState(0);
+
+  useEffect(() => {
+    if (categoryList && categoryList.length > 0) {
+      updateCircularChart();
+    }
+  }, [categoryList]);
+
+  const updateCircularChart = () => {
+    let totalEstimates = 0;
+    let newSliceColor = [];
+    let newValues = [];
+    let otherCost = 0;
+
+    categoryList.forEach((item, index) => {
+      if (index < 4) {
+        let itemTotalCost = 0;
+        item.CategoryItems?.forEach((item_) => {
+          itemTotalCost += item_.cost;
+          totalEstimates += item_.cost;
+        });
+        newSliceColor.push(Colors.COLOR_LIST[index]);
+        newValues.push(itemTotalCost);
+      } else {
+        item.CategoryItems?.forEach((item_) => {
+          otherCost += item_.cost;
+          totalEstimates += item_.cost;
+        });
+      }
+    });
+
+    newSliceColor.push(Colors.COLOR_LIST[4]);
+    newValues.push(otherCost);
+
+    setSliceColor(newSliceColor);
+    setValues(newValues);
+    setTotalCalculatedEstimate(totalEstimates);
+  };
 
   return (
     <View className=" bg-slate-700/50 mt-5 rounded-xl w-[350px] ml-5 items-center p-4">
@@ -21,7 +59,7 @@ const CircularChart = () => {
             coverRadius={0.7}
             coverFill={''}
           />
-          <Text style={styles.currencyText}>N$0</Text>
+          <Text style={styles.currencyText}>N${totalCalculatedEstimate}</Text>
         </View>
         <View className="flex-row items-center ml-4">
           <Feather name="box" size={24} color="white" />

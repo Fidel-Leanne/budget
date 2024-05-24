@@ -59,7 +59,7 @@ const Home = () => {
           />
         }
       >
-        <CircularChart />
+       <CircularChart categoryList={categoryList} />
         {categoryList.length > 0 && <CategoryList categories={categoryList} />}
       </ScrollView>
       <View className="absolute bottom-0 right-0 mb-8 mr-8">
