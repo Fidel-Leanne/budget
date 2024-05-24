@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, Animated } from 'react-native';
+import { View, Text, Animated } from 'react-native';
 import React, { useState, useEffect } from 'react';
 import PieChart from 'react-native-pie-chart';
 import Colors from '../utils/Colors';
@@ -31,6 +31,7 @@ const CircularChart = ({ categoryList }) => {
     let newSliceColor = [];
     let newValues = [];
     let otherCost = 0;
+
     categoryList.forEach((item, index) => {
       if (index < 4) {
         let itemTotalCost = 0;
@@ -47,8 +48,17 @@ const CircularChart = ({ categoryList }) => {
         });
       }
     });
-    newSliceColor.push(Colors.COLOR_LIST[4]);
-    newValues.push(otherCost);
+
+    if (otherCost > 0) {
+      newSliceColor.push(Colors.COLOR_LIST[4]);
+      newValues.push(otherCost);
+    }
+
+    if (totalEstimates === 0) {
+      newSliceColor = [Colors.GRAY];
+      newValues = [1];
+    }
+
     setSliceColor(newSliceColor);
     setValues(newValues);
     setTotalCalculatedEstimate(totalEstimates);
@@ -57,7 +67,7 @@ const CircularChart = ({ categoryList }) => {
   return (
     <View className="bg-slate-700/50 mt-5 rounded-xl w-[350px] mx-auto items-center p-6">
       <Text className="text-white font-psemibold text-lg mb-5">
-        Total Estimate: <Text className="font-bold">${totalCalculatedEstimate}</Text>
+        Total Estimate: <Text className="font-pbold">${totalCalculatedEstimate}</Text>
       </Text>
       <Animated.View
         className="h-[180px] w-[330px] rounded-xl items-center flex-row justify-center"
@@ -69,9 +79,8 @@ const CircularChart = ({ categoryList }) => {
             series={values}
             sliceColor={sliceColor}
             coverRadius={0.65}
-            coverFill={''}
+            coverFill={'#2D3748'}
           />
-          
         </View>
         <View className="flex-col items-start ml-4">
           {categoryList.length === 0 ? (
@@ -87,7 +96,9 @@ const CircularChart = ({ categoryList }) => {
                   size={24}
                   color={Colors.COLOR_LIST[index % Colors.COLOR_LIST.length]}
                 />
-                <Text className="text-secondary-200 font-pmedium ml-2">{index < 4 ? category.name : 'Other'}</Text>
+                <Text className="text-white font-pmedium ml-2">
+                  {index < 4 ? category.name : 'Other'}
+                </Text>
               </View>
             ))
           )}
@@ -98,13 +109,3 @@ const CircularChart = ({ categoryList }) => {
 };
 
 export default CircularChart;
-
-const styles = StyleSheet.create({
-  currencyText: {
-    position: 'absolute',
-    textAlign: 'center',
-    fontSize: 24,
-    color: 'white',
-    fontWeight: 'bold',
-  },
-});
