@@ -11,8 +11,13 @@ const Sidebar = ({ isVisible, onClose }) => {
       onClose();
     }
   };
+  
 
   if (!isVisible) return null;
+
+  const logout = () => {
+     router.replace('/(auth)')
+  }
 
   return (
     <TouchableWithoutFeedback onPress={handlePressOutside}>
